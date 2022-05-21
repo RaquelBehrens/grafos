@@ -6,12 +6,14 @@ import java.io.FileReader;
 public class Grafo {
 
     // Vértices
+    //[1, 2, 3, 4, 5, 6]
     List<Integer> V = new ArrayList<>();
 
     //Rotulo
     List<String> R = new ArrayList<>();
 
     // Arestas
+    //[[1.0, 2.0, 1.0], [1.0, 6.0, 1.0], [2.0, 3.0, 1.0], [3.0, 6.0, 1.0], [3.0, 4.0, 1.0], [3.0, 5.0, 1.0], [4.0, 5.0, 1.0]]
     LinkedList<List<Float>> E = new LinkedList<>();
 
     // Função que mapeia o peso de cada aresta
@@ -65,7 +67,6 @@ public class Grafo {
             if (E.get(i).get(0).equals(v)) {
                 vizinho = E.get(i).get(1);
             } else if (E.get(i).get(1).equals(v)) {
-                System.out.println("aqui");
                 vizinho = E.get(i).get(0);
             }
 
@@ -132,8 +133,6 @@ public class Grafo {
                 E.add(listaVertices);
             }
         }
-        System.out.println(V);
-        System.out.println(E);
     }
 
     public static void main(String[] args) throws FileNotFoundException {
