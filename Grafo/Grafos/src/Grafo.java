@@ -12,7 +12,7 @@ public class Grafo {
     List<String> R = new ArrayList<>();
 
     // Arestas
-    List<List<Float>> E = new ArrayList<>();
+    LinkedList<List<Float>> E = new LinkedList<>();
 
     // Função que mapeia o peso de cada aresta
     float w(float[] vertice) {
@@ -95,8 +95,8 @@ public class Grafo {
         return 2147483647;
     }
 
-    void lerArquivo() throws FileNotFoundException {
-        Scanner in = new Scanner(new FileReader("C:\\Users\\raque\\OneDrive\\Área de Trabalho\\github\\grafos\\Grafo\\Grafos\\src\\exercicio1.txt"));
+    void lerArquivo(String path) throws FileNotFoundException {
+        Scanner in = new Scanner(new FileReader(path));
         boolean lendoVertices = false;
 
         while (in.hasNextLine()) {
@@ -141,7 +141,7 @@ public class Grafo {
         Grafo grafo = new Grafo();
 
         // Lendo arquivo de teste
-        grafo.lerArquivo();
+        grafo.lerArquivo("src\\testes\\arvore_geradora_minima.txt");
 
         float[] vertice = {1.0f, 2.0f};
         float valor = grafo.w(vertice);
