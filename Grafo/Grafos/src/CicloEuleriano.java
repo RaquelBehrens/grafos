@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AlgoritmoDeHierholz {
+public class CicloEuleriano {
 
     boolean ehCiclo;
     List<Integer> caminho = new ArrayList<>();
@@ -14,8 +14,7 @@ public class AlgoritmoDeHierholz {
         List<Integer> ciclo = new ArrayList<>();
         float t = vertice; //t é onde termina o ciclo
 
-        LinkedList<List<Float>> arestasNaoVisitadas = new LinkedList<>();
-        arestasNaoVisitadas = grafo.E;
+        LinkedList<List<Float>> arestasNaoVisitadas = grafo.E;
 
         while (true) {
             List<Float> arestaNaoVisitada = null;
@@ -49,17 +48,17 @@ public class AlgoritmoDeHierholz {
             }
         }
 
-        boolean loopEnd = false;
+
         while (true) {
             float verticeComArestaNaoVisitada = 0.0f;
 
+            boolean loopEnd = true;
             for (int i = 0; i < this.C.size(); i++) {
                 if (this.C.get(i).equals(false)) {
                     verticeComArestaNaoVisitada = grafo.E.get(i).get(0);
                     loopEnd = false;
                     break;
                 }
-                loopEnd = true;
             }
 
             if (loopEnd) {
@@ -86,7 +85,7 @@ public class AlgoritmoDeHierholz {
 
         int v = 1; //vertice arbitrario
 
-        ReturnWithDifferentTypes retornoFuncao = buscaCiclo(grafo, v); //return ;
+        ReturnWithDifferentTypes retornoFuncao = buscaCiclo(grafo, v);
 
         if (!retornoFuncao.getEhCiclo()) {
             return retornoFuncao;
@@ -103,10 +102,17 @@ public class AlgoritmoDeHierholz {
 
     public static void main(String[] args) throws FileNotFoundException {
         Grafo grafo = new Grafo();
-        grafo.lerArquivo("C:\\Users\\raque\\OneDrive\\Área de Trabalho\\github\\grafos\\Grafo\\Grafos\\src\\testes\\ContemCicloEuleriano.txt");
+        grafo.lerArquivo("src\\testes\\SemCicloEuleriano.txt");
 
-        AlgoritmoDeHierholz algoritmo = new AlgoritmoDeHierholz();
+        CicloEuleriano algoritmo = new CicloEuleriano();
         ReturnWithDifferentTypes ehEuleriano = algoritmo.algoritmoDeHierholz(grafo);
-        System.out.println(ehEuleriano.getEhCiclo());
+
+        if (ehEuleriano.getEhCiclo()) {
+            System.out.println("1");
+            System.out.println(ehEuleriano.getCaminho());
+        } else {
+            System.out.println("0");
+        }
+
     }
 }
