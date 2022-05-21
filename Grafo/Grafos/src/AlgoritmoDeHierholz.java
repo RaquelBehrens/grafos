@@ -7,8 +7,9 @@ public class AlgoritmoDeHierholz {
 
     boolean ehCiclo;
     List<Integer> caminho = new ArrayList<>();
+    List<Boolean> C = new ArrayList<>(); //arestas visitadas
 
-    ReturnWithDifferentTypes buscaCiclo(Grafo grafo, float vertice, List<Boolean> C) {
+    ReturnWithDifferentTypes buscaCiclo(Grafo grafo, float vertice) {
 
         List<Integer> ciclo = new ArrayList<>();
         float t = vertice; //t é onde termina o ciclo
@@ -21,15 +22,17 @@ public class AlgoritmoDeHierholz {
             for (int i = 0; i < arestasNaoVisitadas.size(); i++) {
 
                 if ((arestasNaoVisitadas.get(i).get(0).equals(vertice) || (arestasNaoVisitadas.get(i).get(1).equals(vertice)))
-                        && C.get(i).equals(false)) {
+                        && this.C.get(i).equals(false)) {
 
                     arestaNaoVisitada = arestasNaoVisitadas.get(i); // O(1)
-                    C.set(i, true);
+                    this.C.set(i, true);
                     break;
                 }
             }
 
             if (arestaNaoVisitada == null) {
+                this.ehCiclo = false;
+                this.caminho = null;
                 return new ReturnWithDifferentTypes(false, null).getTypes();
             } else {
                 if (arestaNaoVisitada.get(0) == vertice) {
@@ -50,9 +53,10 @@ public class AlgoritmoDeHierholz {
         while (true) {
             float verticeComArestaNaoVisitada = 0.0f;
 
-            for (int i = 0; i < C.size(); i++) {
-                if (C.get(i).equals(false)) {
+            for (int i = 0; i < this.C.size(); i++) {
+                if (this.C.get(i).equals(false)) {
                     verticeComArestaNaoVisitada = grafo.E.get(i).get(0);
+                    loopEnd = false;
                     break;
                 }
                 loopEnd = true;
@@ -63,7 +67,7 @@ public class AlgoritmoDeHierholz {
             }
 
             ReturnWithDifferentTypes retornoFuncao;
-            retornoFuncao = buscaCiclo(grafo, verticeComArestaNaoVisitada, C);
+            retornoFuncao = buscaCiclo(grafo, verticeComArestaNaoVisitada);
 
             if (!retornoFuncao.getEhCiclo()) {
                 return retornoFuncao;
@@ -76,20 +80,19 @@ public class AlgoritmoDeHierholz {
     ReturnWithDifferentTypes algoritmoDeHierholz(Grafo grafo) {
         int quantidadeArestas = grafo.qtdArestas();
 
-        List<Boolean> C = new ArrayList<>(); //arestas visitadas
         for (int i = 0; i < quantidadeArestas; i++) {
-            C.add(false);
+            this.C.add(false);
         }
 
         int v = 1; //vertice arbitrario
 
-        ReturnWithDifferentTypes retornoFuncao = buscaCiclo(grafo, v, C); //return ;
+        ReturnWithDifferentTypes retornoFuncao = buscaCiclo(grafo, v); //return ;
 
         if (!retornoFuncao.getEhCiclo()) {
             return retornoFuncao;
         } else {
-            for (int i = 0; i < C.size(); i++) {
-                if (!C.get(i)) {
+            for (int i = 0; i < this.C.size(); i++) {
+                if (!this.C.get(i)) {
                     return new ReturnWithDifferentTypes(false, null);
                 }
             }
@@ -100,7 +103,7 @@ public class AlgoritmoDeHierholz {
 
     public static void main(String[] args) throws FileNotFoundException {
         Grafo grafo = new Grafo();
-        grafo.lerArquivo("src\\testes\\ContemCicloEuleriano.txt");
+        grafo.lerArquivo("C:\\Users\\raque\\OneDrive\\Área de Trabalho\\github\\grafos\\Grafo\\Grafos\\src\\testes\\ContemCicloEuleriano.txt");
 
         AlgoritmoDeHierholz algoritmo = new AlgoritmoDeHierholz();
         ReturnWithDifferentTypes ehEuleriano = algoritmo.algoritmoDeHierholz(grafo);
