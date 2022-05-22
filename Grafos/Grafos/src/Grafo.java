@@ -16,16 +16,6 @@ public class Grafo {
     //[[1.0, 2.0, 1.0], [1.0, 6.0, 1.0], [2.0, 3.0, 1.0], [3.0, 6.0, 1.0], [3.0, 4.0, 1.0], [3.0, 5.0, 1.0], [4.0, 5.0, 1.0]]
     LinkedList<List<Float>> E = new LinkedList<>();
 
-    // Função que mapeia o peso de cada aresta
-    float w(float[] vertice) {
-        for (int i = 0; i < E.size(); i++) {
-            if (E.get(i).get(0).equals(vertice[0]) && E.get(i).get(1).equals(vertice[1])) {
-                return E.get(i).get(2);
-            }
-        }
-        return 2147483647;
-    }
-
     int qtdVertices() {
         int tamanho = V.size();
         return tamanho;
@@ -39,11 +29,10 @@ public class Grafo {
     int grau(float v) {
         int quantidade = 0;
 
-        for (int i = 0; i < E.size(); i++) {
-            for (int j = 0; j < E.get(i).size(); j++)
-                if (E.get(i).get(j).equals(v)) {
-                    quantidade++;
-                }
+        for (int i = 0; i < qtdArestas(); i++) {
+            if (E.get(i).get(0).equals(v) || E.get(i).get(1).equals(v)) {
+                quantidade++;
+            }
         }
         return quantidade;
     }
@@ -141,10 +130,6 @@ public class Grafo {
 
         // Lendo arquivo de teste
         grafo.lerArquivo("src\\testes\\arvore_geradora_minima.txt");
-
-        float[] vertice = {1.0f, 2.0f};
-        float valor = grafo.w(vertice);
-        System.out.println(valor);
 
         System.out.println(grafo.qtdVertices());
 
