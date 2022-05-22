@@ -9,7 +9,7 @@ public class CicloEuleriano {
     List<Integer> caminho = new ArrayList<>();
     List<Boolean> C = new ArrayList<>(); //arestas visitadas
 
-    ReturnWithDifferentTypes buscaCiclo(Grafo grafo, float vertice) {
+    ReturnWithDifferentTypes buscaSubcicloEuleriano(Grafo grafo, float vertice) {
 
         List<Integer> ciclo = new ArrayList<>();
         float t = vertice; //t é onde termina o ciclo
@@ -66,7 +66,7 @@ public class CicloEuleriano {
             }
 
             ReturnWithDifferentTypes retornoFuncao;
-            retornoFuncao = buscaCiclo(grafo, verticeComArestaNaoVisitada);
+            retornoFuncao = buscaSubcicloEuleriano(grafo, verticeComArestaNaoVisitada);
 
             if (!retornoFuncao.getEhCiclo()) {
                 return retornoFuncao;
@@ -85,7 +85,7 @@ public class CicloEuleriano {
 
         int v = 1; //vertice arbitrario
 
-        ReturnWithDifferentTypes retornoFuncao = buscaCiclo(grafo, v);
+        ReturnWithDifferentTypes retornoFuncao = buscaSubcicloEuleriano(grafo, v);
 
         if (!retornoFuncao.getEhCiclo()) {
             return retornoFuncao;
