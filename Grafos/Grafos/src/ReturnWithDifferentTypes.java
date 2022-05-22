@@ -15,16 +15,8 @@ public class ReturnWithDifferentTypes {
         return this.ehCiclo;
     }
 
-    public void setEhCiclo(boolean novoEhCiclo) {
-        this.ehCiclo = novoEhCiclo;
-    }
-
     public List<Integer> getCaminho() {
         return this.caminho;
-    }
-
-    public void setCaminho(List<Integer> novoCaminho) {
-        this.caminho = novoCaminho;
     }
 
     ReturnWithDifferentTypes getTypes() {

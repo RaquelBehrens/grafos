@@ -38,7 +38,7 @@ public class Grafo {
     }
 
     String rotulo(int v) {
-        for (int i = 0; i < V.size(); i++) {
+        for (int i = 0; i < qtdVertices(); i++) {
             if (V.get(i).equals(v)) {
                 return R.get(i);
             }
@@ -50,7 +50,7 @@ public class Grafo {
         float vizinho = 0;
         List<Float> lista_vizinhos = new ArrayList<>();
 
-        for (int i = 0; i < E.size(); i++) {
+        for (int i = 0; i < qtdArestas(); i++) {
             vizinho = 0;
 
             if (E.get(i).get(0).equals(v)) {
@@ -68,7 +68,7 @@ public class Grafo {
     }
 
     boolean haAresta(float[] aresta) {
-        for (int i = 0; i < E.size(); i++) {
+        for (int i = 0; i < qtdArestas(); i++) {
             if (E.get(i).get(0).equals(aresta[0]) && E.get(i).get(1).equals(aresta[1])) {
                 return true;
             }
@@ -77,7 +77,7 @@ public class Grafo {
     }
 
     float peso(float[] aresta) {
-        for (int i = 0; i < E.size(); i++) {
+        for (int i = 0; i < qtdArestas(); i++) {
             if (E.get(i).get(0).equals(aresta[0]) && E.get(i).get(1).equals(aresta[1])) {
                 return E.get(i).get(2);
             }
