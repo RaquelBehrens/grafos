@@ -19,6 +19,9 @@ public class Grafo {
     //[[1.0, 2.0, 1.0], [1.0, 6.0, 1.0], [2.0, 3.0, 1.0], [3.0, 6.0, 1.0], [3.0, 4.0, 1.0], [3.0, 5.0, 1.0], [4.0, 5.0, 1.0]]
     LinkedList<List<Float>> E = new LinkedList<>();
 
+    LinkedList<List<Float>> returnE(){
+        return this.E;
+    }
     int qtdVertices() {
         int tamanho = V.size();
         return tamanho;
