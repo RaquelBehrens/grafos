@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -100,9 +101,13 @@ public class CicloEuleriano {
     }
 
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, URISyntaxException {
         Grafo grafo = new Grafo();
-        grafo.lerArquivo("src\\testes\\SemCicloEuleriano.txt");
+        String separator = System.getProperty("file.separator");
+
+        // Lendo arquivo de teste
+        grafo.lerArquivo(separator+"testes"+separator+"SemCicloEuleriano.txt");
+
 
         CicloEuleriano algoritmo = new CicloEuleriano();
         ReturnWithDifferentTypes ehEuleriano = algoritmo.algoritmoDeHierholz(grafo);

@@ -1,5 +1,8 @@
 import javax.swing.*;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.*;
 import java.io.FileReader;
 
@@ -85,8 +88,9 @@ public class Grafo {
         return 2147483647;
     }
 
-    void lerArquivo(String path) throws FileNotFoundException {
-        Scanner in = new Scanner(new FileReader(path));
+    void lerArquivo(String path) throws FileNotFoundException, URISyntaxException {
+        URL url = Grafo.class.getResource(path);
+        Scanner in = new Scanner(new File(url.toURI()));
         boolean lendoVertices = false;
 
         while (in.hasNextLine()) {
@@ -124,12 +128,13 @@ public class Grafo {
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, URISyntaxException {
 
         Grafo grafo = new Grafo();
+        String separator = System.getProperty("file.separator");
 
         // Lendo arquivo de teste
-        grafo.lerArquivo("src\\testes\\arvore_geradora_minima.txt");
+        grafo.lerArquivo(separator+"testes"+separator+"arvore_geradora_minima.txt");
 
         System.out.println(grafo.qtdVertices());
 

@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,9 +50,13 @@ public class FloydWarshall {
         return matrizD;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, URISyntaxException {
         Grafo grafo = new Grafo();
-        grafo.lerArquivo("src\\testes\\arvore_geradora_minima.txt");
+        String separator = System.getProperty("file.separator");
+
+        // Lendo arquivo de teste
+        grafo.lerArquivo(separator+"testes"+separator+"arvore_geradora_minima.txt");
+
 
         FloydWarshall algoritmo = new FloydWarshall();
         ArrayList<Float>[] matrizD = algoritmo.floydWarshall(grafo);
